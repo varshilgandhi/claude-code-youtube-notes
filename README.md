@@ -89,19 +89,59 @@ You can also explicitly call it: `Use the youtube-notes skill on https://youtu.b
 
 ## Example output
 
-From [_How I Start EVERY Claude Code Project_](https://youtu.be/aQvpqlSiUIQ) by [AI with Avthar](https://www.youtube.com/@AIwithAvthar):
+Real run on Avthar's [_How I Start EVERY Claude Code Project_](https://youtu.be/aQvpqlSiUIQ) (34:15) → 15 takeaways extracted in ~90 seconds, full file at [`examples/videos/aQvpqlSiUIQ-psb-system.md`](./examples/videos/aQvpqlSiUIQ-psb-system.md).
+
+<!--
+SCREENSHOT SLOT: Once a preview image exists at docs/preview.png, replace this
+HTML comment with:    ![Notes preview](docs/preview.png)
+
+Quick way to capture one:
+  1. Open examples/videos/aQvpqlSiUIQ-psb-system.md on github.com in your browser.
+  2. Screenshot the rendered top half (TL;DR + first 2-3 takeaways).
+  3. Drag-and-drop the PNG into a new GitHub issue's text area on this repo —
+     GitHub uploads it and gives you a CDN URL like
+     https://github.com/user-attachments/assets/<uuid>.
+  4. Paste that URL into the README in place of this comment.
+  (Or commit the PNG to docs/preview.png and reference it locally.)
+-->
+
+
+A few takeaways pulled directly from that file:
+
+> ### 11. Plan mode is the single most underused feature
+>
+> **What:** Avthar says the most common mistake people make with Claude Code is not using plan mode enough. Plan mode = Claude lays out the approach, asks clarifying questions, doesn't touch files until you approve.
+> **How to apply:** Default to plan mode for any task touching more than one file. Press `Shift+Tab` twice or type `/plan`. If you've been one-shotting features, change the default.
+> **Source:** [00:26:32]
 
 > ### 12. The `#` (hash) trick — push learnings into `claude.md` on the fly
 >
 > **What:** When Claude makes a mistake, don't just fix it. Type `#` followed by an instruction — Claude will save that instruction into the relevant `claude.md` automatically. This is "regression prevention" — turn every mistake into a permanent rule.
->
 > **How to apply:** After any "no, don't do X, do Y" correction, immediately follow up with `# When doing <thing>, always do Y, never X`. Costs 5 seconds, prevents the mistake forever.
->
 > **Source:** [00:31:47]
->
 > **Why:** This is the closest thing Claude Code has to a "learn from this mistake" button.
 
-Full notes file: [`examples/videos/aQvpqlSiUIQ-psb-system.md`](./examples/videos/aQvpqlSiUIQ-psb-system.md).
+<details>
+<summary><b>Click to see all 15 takeaway titles</b></summary>
+
+1. Before opening Claude Code, answer two questions on paper
+2. Force the AI to ask *you* clarifying questions during planning
+3. Use voice mode when ideas are fuzzy
+4. Be ruthlessly specific in product requirements
+5. Be explicit about your tech stack — Claude will pick random ones if you don't
+6. Provision infra during Plan, not Build
+7. Keep `claude.md` finite — link off to other docs
+8. Set up four "automated docs" Claude updates as it works
+9. Pre-configure permissions in settings — stop Claude from waiting on you
+10. Stop hook: keep Claude going until tests pass
+11. Plan mode is the single most underused feature
+12. The `#` (hash) trick — push learnings into `claude.md` on the fly
+13. Model selection: Opus for plan/complex, Sonnet for implementation, Haiku for trivial
+14. Three build workflows — pick by task shape
+15. Code is cheap — throw away aggressively
+
+Each one has What / How to apply / Source timestamp / Why in the [full file](./examples/videos/aQvpqlSiUIQ-psb-system.md).
+</details>
 
 ---
 
