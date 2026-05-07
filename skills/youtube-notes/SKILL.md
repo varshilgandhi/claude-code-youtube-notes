@@ -12,8 +12,8 @@ You extract **actionable, practical notes** from YouTube videos and store them i
 ```
 ~/.claude/youtube-notes/
 ├── INDEX.md                          # master index — update on every run
-├── transcripts/<videoId>.txt         # cleaned transcript (raw material)
-└── videos/<videoId>-<slug>.md        # per-video actionable notes
+├── transcripts/<videoId>.txt           # cleaned transcript (raw material)
+└── videos/<YYYY-MM-DD>-<slug>.md       # per-video actionable notes (upload date + slug)
 ```
 
 ## Workflow
@@ -94,18 +94,27 @@ Aim for **5-15 high-quality insights** per video. Better to have 5 sharp ones th
 
 ### 4. Write the per-video file
 
-Path: `~/.claude/youtube-notes/videos/<videoId>-<slug>.md` where slug is a 2-4 word kebab-case summary.
+**Filename convention:** `~/.claude/youtube-notes/videos/<YYYY-MM-DD>-<slug>.md`
+- `YYYY-MM-DD` is the **upload date** of the video (so the folder sorts chronologically)
+- `slug` is a 2-4 word kebab-case summary of the topic, not just the title verbatim
+- The `video_id` is preserved in the frontmatter for traceability — don't put it in the filename
+
+**YAML title gotcha:** if the title contains a colon (`:`) or starts with a quote character (`"`), wrap the whole title in **single quotes** in the YAML frontmatter. Double quotes inside double quotes break the YAML parser. Examples:
+- `title: 'How I Start EVERY Claude Code Project'` (safe)
+- `title: '"Software Fundamentals Matter More Than Ever" — Matt Pocock'` (inner quotes need single-quote wrapper)
+- `title: '"Missions: Multi-Agent Systems That Ship for Days" — Luke Alvoeiro'` (inner colon AND inner quotes)
 
 Template:
 
 ```markdown
 ---
 video_id: <id>
-title: <full title>
+title: '<full title — single-quoted to be safe>'
 channel: <uploader>
 duration: <HH:MM>
 url: https://youtu.be/<id>
 watched: <today's date YYYY-MM-DD>
+upload_date: <YYYY-MM-DD>
 ---
 
 # <title>
@@ -151,7 +160,7 @@ Brief message: video file path + 2-3 most striking takeaways. Don't dump the who
 - **No captions available:** Tell the user. Don't fabricate notes. Suggest they find a different video on the same topic, or paste a written summary they trust.
 - **Non-English video:** yt-dlp can fetch other languages — ask the user if they want notes in English or the source language before processing.
 - **Live stream / very long (>2h):** Ask the user if they want full coverage or just a specific section (timestamp range).
-- **Already processed:** If `videos/<id>-*.md` exists, ask before overwriting. Default to opening the existing file instead of regenerating.
+- **Already processed:** Filenames don't carry the video id, so check via `grep -l "video_id: <id>" ~/.claude/youtube-notes/videos/*.md`. If a match exists, ask before overwriting. Default to opening the existing file instead of regenerating.
 - **Tool not installed:** If `~/.local/bin/yt-dlp` is missing, install with `pip install --user --break-system-packages yt-dlp` (Python 3.12+ on Debian/Ubuntu needs `--break-system-packages`).
 - **HTTP 429 from YouTube:** Wait and retry once. If it persists, tell the user.
 

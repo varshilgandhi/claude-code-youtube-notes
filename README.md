@@ -122,14 +122,14 @@ When you adopt a suggestion in a session, the matching item in `INDEX.md`'s Quic
 
 ## Example output
 
-Real run on Avthar's [_How I Start EVERY Claude Code Project_](https://youtu.be/aQvpqlSiUIQ) (34:15) → 15 takeaways extracted in ~90 seconds, full file at [`examples/videos/aQvpqlSiUIQ-psb-system.md`](./examples/videos/aQvpqlSiUIQ-psb-system.md).
+Real run on Avthar's [_How I Start EVERY Claude Code Project_](https://youtu.be/aQvpqlSiUIQ) (34:15) → 15 takeaways extracted in ~90 seconds, full file at [`examples/videos/2025-12-17-psb-system.md`](./examples/videos/2025-12-17-psb-system.md).
 
 <!--
 SCREENSHOT SLOT: Once a preview image exists at docs/preview.png, replace this
 HTML comment with:    ![Notes preview](docs/preview.png)
 
 Quick way to capture one:
-  1. Open examples/videos/aQvpqlSiUIQ-psb-system.md on github.com in your browser.
+  1. Open examples/videos/2025-12-17-psb-system.md on github.com in your browser.
   2. Screenshot the rendered top half (TL;DR + first 2-3 takeaways).
   3. Drag-and-drop the PNG into a new GitHub issue's text area on this repo —
      GitHub uploads it and gives you a CDN URL like
@@ -173,7 +173,7 @@ A few takeaways pulled directly from that file:
 14. Three build workflows — pick by task shape
 15. Code is cheap — throw away aggressively
 
-Each one has What / How to apply / Source timestamp / Why in the [full file](./examples/videos/aQvpqlSiUIQ-psb-system.md).
+Each one has What / How to apply / Source timestamp / Why in the [full file](./examples/videos/2025-12-17-psb-system.md).
 </details>
 
 ---

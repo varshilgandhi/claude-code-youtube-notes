@@ -20,7 +20,7 @@ _(Will populate as more videos are processed)_
 
 | Date | Channel | Title | File | Top Takeaway |
 |------|---------|-------|------|--------------|
-| 2025-12-17 | AI with Avthar | How I Start EVERY Claude Code Project | [aQvpqlSiUIQ-psb-system.md](videos/aQvpqlSiUIQ-psb-system.md) | Use the PSB system: Plan (spec doc) → Setup (7-step checklist) → Build (3 workflows). Plan mode is the most underused feature. |
+| 2025-12-17 | AI with Avthar | How I Start EVERY Claude Code Project | [2025-12-17-psb-system.md](videos/2025-12-17-psb-system.md) | Use the PSB system: Plan (spec doc) → Setup (7-step checklist) → Build (3 workflows). Plan mode is the most underused feature. |
 
 ---
 

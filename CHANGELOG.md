@@ -4,6 +4,17 @@ All notable changes to this project are documented here. The format follows
 [Keep a Changelog](https://keepachangelog.com/en/1.1.0/) and this project
 uses date-based versioning until it stabilizes.
 
+## [0.2.1] — 2026-05-07
+
+Cleanup release after dogfooding on real videos.
+
+### Changed
+- **Filename convention:** per-video files now use `<YYYY-MM-DD>-<slug>.md` (upload-date prefix) instead of `<videoId>-<slug>.md`. Folder sorts chronologically; video id stays in frontmatter for traceability. Existing example renamed: `aQvpqlSiUIQ-psb-system.md` → `2025-12-17-psb-system.md`.
+- **Duplicate detection:** since filename no longer carries the video id, the skill now greps frontmatter (`grep -l "video_id: <id>"`) before deciding whether to overwrite.
+
+### Fixed
+- YAML frontmatter quoting guidance: titles containing colons or inner quotes need to be wrapped in **single quotes**. The previous template would silently produce broken frontmatter that GitHub flagged with `"did not find expected key while parsing a block mapping"`.
+
 ## [0.2.0] — 2026-05-07
 
 Closes the loop on watch → apply.
