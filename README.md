@@ -1,19 +1,24 @@
 # claude-code-youtube-notes
 
-A Claude Code skill that turns any YouTube video into **actionable notes** — instead of you watching the whole video and taking notes manually.
+Two Claude Code skills that close the loop on **watch → apply** for YouTube videos about Claude Code, AI engineering, and dev tooling.
 
-Paste a YouTube URL in any Claude Code conversation. The skill auto-fires, downloads the captions, reads the full transcript, extracts 5–15 sharp takeaways with timestamps and "how to apply" lines, and writes structured markdown to `~/.claude/youtube-notes/`.
+1. **`youtube-notes`** — paste a YouTube URL in any conversation. Auto-fires, downloads the captions, reads the full transcript, extracts 5–15 sharp takeaways with timestamps and "how to apply" lines, and writes structured markdown to `~/.claude/youtube-notes/`.
+2. **`dev-tips`** — when you describe a task one of those takeaways could help with (planning a project, getting unstuck, "how should I structure X"), Claude surfaces 1–3 relevant ones at the top of its reply, with a "why this applies" line. Plus a `/yt-tip` slash command for explicit pulls.
 
-Built because I kept watching long Claude Code / AI engineering videos, taking sloppy notes, and never actually applying what I learned. This system makes the apply step the default.
+Built because I kept watching long videos, taking sloppy notes, and never actually applying anything. This system makes the apply step the default.
 
 ---
 
 ## What you get
 
 ```
+~/.claude/skills/youtube-notes/SKILL.md       # capture: URL → notes
+~/.claude/skills/dev-tips/SKILL.md            # apply: surface notes when relevant
+~/.claude/commands/yt-tip.md                  # /yt-tip — manual pulls
+
 ~/.claude/youtube-notes/
-├── INDEX.md                     # master index — every video + a quick-apply backlog
-├── transcripts/<id>.txt         # cleaned full transcripts
+├── INDEX.md                     # master index, quick-apply backlog, recently-adopted log
+├── transcripts/<id>.txt         # cleaned full transcripts (kept locally for follow-ups)
 └── videos/<id>-<slug>.md        # per-video actionable notes
 ```
 
@@ -22,6 +27,8 @@ Each per-video file has:
 - **Top Takeaways** — each with **What / How to apply / Source timestamp / Why** (when non-obvious)
 - **Skipped** — sponsor reads and pitches called out by timestamp so you know they weren't missed
 - **Quick-apply checklist** — the tightest version of every takeaway
+
+The `dev-tips` skill is conservative on triggers: it fires when you describe a task one of your takeaways could change the outcome of, and stays silent for quick lookups, narrow code edits, and mid-task continuations. When you adopt a suggestion, the matching item in `INDEX.md` flips from `- [ ]` to `- [x]` and gets logged in the "Recently Adopted" section.
 
 See [`examples/`](./examples/) for a real run — notes from Avthar's 34-minute video [_How I Start EVERY Claude Code Project_](https://youtu.be/aQvpqlSiUIQ).
 
@@ -44,46 +51,72 @@ pipx install yt-dlp
 
 Make sure it's on your `PATH`. The skill defaults to `~/.local/bin/yt-dlp` — adjust `SKILL.md` if yours lives elsewhere.
 
-**2. Drop the skill into your Claude Code skills folder:**
-
-```bash
-mkdir -p ~/.claude/skills/youtube-notes
-curl -fsSL https://raw.githubusercontent.com/varshilgandhi/claude-code-youtube-notes/main/skills/youtube-notes/SKILL.md \
-  -o ~/.claude/skills/youtube-notes/SKILL.md
-```
-
-Or clone this repo and copy:
+**2. Clone this repo and copy the skills + command:**
 
 ```bash
 git clone https://github.com/varshilgandhi/claude-code-youtube-notes.git
-cp -r claude-code-youtube-notes/skills/youtube-notes ~/.claude/skills/
+cd claude-code-youtube-notes
+cp -r skills/youtube-notes ~/.claude/skills/
+cp -r skills/dev-tips      ~/.claude/skills/
+mkdir -p ~/.claude/commands && cp commands/yt-tip.md ~/.claude/commands/
 ```
 
-**3. Create the output folder:**
+**3. Create the output folder + seed the index:**
 
 ```bash
 mkdir -p ~/.claude/youtube-notes/{videos,transcripts}
+cp examples/INDEX.md ~/.claude/youtube-notes/INDEX.md  # optional — seeds with section structure
 ```
 
-That's it.
+That's it. Restart Claude Code so it picks up the new skills.
 
 ---
 
 ## Use
 
-Open Claude Code in any project. Paste a YouTube URL with a hint that you want notes:
+### Capture (youtube-notes)
+
+Paste a YouTube URL in any Claude Code conversation:
 
 ```
 Notes from this please: https://youtu.be/aQvpqlSiUIQ
 ```
 
-The skill auto-triggers. After a minute or two, you'll have:
+The skill auto-fires. After a minute or two, you have:
 
 - A new file at `~/.claude/youtube-notes/videos/<id>-<slug>.md`
-- The transcript saved at `~/.claude/youtube-notes/transcripts/<id>.txt`
+- The transcript at `~/.claude/youtube-notes/transcripts/<id>.txt`
 - An updated row in `~/.claude/youtube-notes/INDEX.md`
 
 You can also explicitly call it: `Use the youtube-notes skill on https://youtu.be/...`
+
+### Apply (dev-tips)
+
+Just describe what you're working on. When a takeaway from your notes genuinely applies, Claude prepends a tip box like this to its reply:
+
+```markdown
+💡 From your YouTube notes
+
+- **Plan mode is the most underused feature** — AI with Avthar, How I Start EVERY Claude Code Project
+  Why this applies: you're starting a multi-file feature — plan mode catches ambiguity before edits.
+- **Be explicit about your tech stack** — AI with Avthar, How I Start EVERY Claude Code Project
+  Why this applies: you haven't specified DB/auth in your spec yet.
+
+---
+```
+
+…then continues with the actual task. The skill is conservative: it stays silent for quick lookups and narrow code edits.
+
+For an explicit pull, use the slash command:
+
+```
+/yt-tip                    # surface the most useful unticked items for current context
+/yt-tip planning           # filter to a topic
+/yt-tip claude.md
+/yt-tip hooks
+```
+
+When you adopt a suggestion in a session, the matching item in `INDEX.md`'s Quick-Apply Backlog flips from `- [ ]` to `- [x]` automatically and gets logged in the "Recently Adopted" section.
 
 ---
 

@@ -4,6 +4,19 @@ All notable changes to this project are documented here. The format follows
 [Keep a Changelog](https://keepachangelog.com/en/1.1.0/) and this project
 uses date-based versioning until it stabilizes.
 
+## [0.2.0] — 2026-05-07
+
+Closes the loop on watch → apply.
+
+### Added
+- `dev-tips` skill: when you describe a task one of your accumulated takeaways could change the outcome of, Claude prepends a `💡 From your YouTube notes` tip box (1–3 takeaways with a "why this applies" line) before handling the task. Conservative trigger discipline — silent for quick lookups, narrow edits, and mid-task continuations.
+- `/yt-tip` slash command for explicit pulls. Optional topic argument: `/yt-tip planning`, `/yt-tip hooks`, etc.
+- Adoption tracking: when a suggestion gets acted on in a session, the matching item in `INDEX.md`'s Quick-Apply Backlog flips from `- [ ]` to `- [x]` and is logged in a new "Recently Adopted" section.
+
+### Changed
+- Top of README and `examples/INDEX.md` rewritten to describe the **capture → apply** flow as the headline value, not just capture.
+- Install steps now copy both skills + the slash command in one block.
+
 ## [0.1.0] — 2026-05-07
 
 Initial public release.
