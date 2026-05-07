@@ -4,6 +4,11 @@ All notable changes to this project are documented here. The format follows
 [Keep a Changelog](https://keepachangelog.com/en/1.1.0/) and this project
 uses date-based versioning until it stabilizes.
 
+## [0.2.2] — 2026-05-07
+
+### Fixed
+- **Takeaway formatting:** the `**What:** / **How to apply:** / **Source:** / **Why:**` lines were emitted as adjacent lines without blank separators, which Markdown collapsed into a single running paragraph on GitHub. Each label now gets its own paragraph block (blank line before it). Skill template + example file both updated.
+
 ## [0.2.1] — 2026-05-07
 
 Cleanup release after dogfooding on real videos.

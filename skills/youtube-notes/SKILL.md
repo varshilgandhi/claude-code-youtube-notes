@@ -130,12 +130,21 @@ upload_date: <YYYY-MM-DD>
 ### 1. <Insight title>
 
 **What:** <one sentence>
+
 **How to apply:** <concrete: a command, a prompt, a file change, a habit>
+
 **Source:** [HH:MM:SS]
+
 **Why** _(optional, only if non-obvious)_: <reasoning>
 
 ### 2. ...
 
+## Skipped
+```
+
+**Formatting note:** Always put a **blank line between each `**Label:**` row** within a takeaway (What / How to apply / Source / Why). Without blank lines, Markdown collapses them into a single running paragraph and they render as one wall of text on GitHub. Each label deserves its own paragraph block.
+
+```markdown
 ## Skipped
 
 <one line noting any sponsor / pitch / off-topic segments and their timestamps, so future-you knows you didn't just miss them>
